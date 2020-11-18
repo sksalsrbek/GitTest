@@ -330,11 +330,8 @@
                                 </Grid>
                                 <Grid Grid.Column="1">
                                     <TextBlock Text="Laser" VerticalAlignment="Top" Foreground="#d3d5d9" FontSize="16" FontFamily="/DPT_WPF;component/Font/#NanumGothic" FontWeight="Bold" Margin="50, 20, 0, 0"/>
-                                    <ucM270:ucM270Laser x:Name="_ucM270Laser" Width="222" Height="179" Margin="0,-50,0,0">
-                                        <!--<ucM270:ucM270Laser.Background>
-                                            <ImageBrush ImageSource="imgTab/1_home/laser/laser.png"/>
-                                        </ucM270:ucM270Laser.Background>-->
-                                    </ucM270:ucM270Laser>
+                                    <ucM270:ucM270Laser x:Name="_ucM270Laser" Width="222" Height="179" Margin="0,-50,0,0"/>
+
                                     <Image x:Name="btn_laser_power" Visibility="Visible" Source="imgTab/1_home/laser/power_btn.png" Width="76" Height="76" Margin="-250,270,0,0">
                                         <Image.InputBindings>
                                             <MouseBinding Gesture="LeftClick" Command="{Binding LaserControlCommand}"/>
