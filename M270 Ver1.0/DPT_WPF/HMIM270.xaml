@@ -1,0 +1,1152 @@
+﻿<Window xmlns:ucCommon="clr-namespace:DPT_WPF.ucCommon"  xmlns:ucM270="clr-namespace:DPT_WPF.ucM270"  x:Class="DPT_WPF.HMIM270"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DPT_WPF"
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:LoadingAni="clr-namespace:DPT_WPF.imgLoading"
+        xmlns:options="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
+        mc:Ignorable="d" 
+      d:DesignHeight="1920" d:DesignWidth="1080"
+      Title="HMIM270" Height="1920" Width="1080" WindowStyle="None" WindowState="Maximized" HorizontalAlignment="Center" VerticalAlignment="Center" Closed="Window_Closed">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/allbackground.png"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95"/>
+            <RowDefinition Height="4"/>
+            <RowDefinition Height="118"/>
+            <RowDefinition Height="315"/>
+            <RowDefinition Height="128*"/>
+            <RowDefinition Height="73"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0,3.667" Grid.RowSpan="2">
+            <Grid>
+                <Image Grid.Column="2" Grid.RowSpan="2" Source="/imgTop/top_basebox.png" Stretch="None"></Image>
+                <Image  Source="/imgTop/login.png" Height="44" Width="44" Margin="40,27,988,24"/>
+                <Grid Margin="80,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding FtpName}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="#FF45BDFF" RenderTransformOrigin="0,0.5" FontSize="10" Width="99" Margin="14,0,39,0" Grid.ColumnSpan="2"/>
+                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding UserName}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0,0.5" Margin="12,0,0,0" FontSize="18" Grid.ColumnSpan="2" Width="138"/>
+                    <Image x:Name="LogoutBTN" Grid.Column="4" Grid.RowSpan="2" Source="/imgTop/top_btn_logout.png" Stretch="None" Margin="0,10,0,-10">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding WindowCloseCommand}"/>
+                        </Image.InputBindings>
+                    </Image>
+                </Grid>
+            </Grid>
+
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0.333,0,314.333" Grid.RowSpan="2">
+            <Image Source="/imgTab/4_moter/title box.png" Width="180" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="41,11,851,57.334"/>
+            <Label x:Name="AutoStatus" Content="자동공급" FontSize="18" Foreground="#D3D5D9" FontFamily="/DPT_WPF;component/Font/#NanumSquare Bold" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="74,24,874,64.334" Height="30" Width="124"/>
+            <Rectangle Height="51" Canvas.Left="-564" Canvas.Top="271" Width="182" Margin="40,13,850,54.334">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="Black" Opacity="0"/>
+                </Rectangle.Fill>
+                <Rectangle.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding AutoSupplyCommand}"/>
+                </Rectangle.InputBindings>
+            </Rectangle>
+            <Image Source="imgTop/title_deagun.png" HorizontalAlignment="Center" Width="315" Height="34"/>
+        </Grid>
+
+        <Grid Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="1" Margin="0,0.333">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Grid.ColumnSpan="3">
+                <Image Source="imgPrinting/base shape.png" Width="850" Height="232"/>
+                <Image Source="imgPrinting/printing_State_shape.png" Width="248" Height="248" HorizontalAlignment="Left" Margin="105,0,0,0"/>
+            </Grid>
+            <Grid Grid.Column="0">
+                <TextBlock Text="{Binding StrPrintStaus}" FontSize="18" Foreground="#ffecd0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,-70,105,0"/>
+                <TextBlock x:Name="printingPercent" Text="{Binding StrPrintPercetage}" FontSize="50" Foreground="#ffecd0" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="160,0,70,0"/>
+                <Label x:Name="lblPsTime" Content="00h:00m:00s" FontSize="18" Foreground="#ffecd0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,70,85,0"/>
+                <lvc:Gauge x:Name="printGauge" Width="224" Height="224" HorizontalAlignment="Right" Uses360Mode="True" Value="0" From="0" To="100" InnerRadius="107" Margin="0,10,19,10" FromColor="#ffffecd0" ToColor="#ffffecd0" ContentStringFormat="" RenderTransformOrigin="0.5,0.5" Foreground="Transparent" GaugeBackground="Transparent">
+                    <lvc:Gauge.GaugeRenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="90"></RotateTransform>
+                        </TransformGroup>
+                    </lvc:Gauge.GaugeRenderTransform>
+                </lvc:Gauge>
+            </Grid>
+            <Grid Grid.Column="1" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="60*"/>
+                    </Grid.ColumnDefinitions>
+
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="60*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="3" Margin="0,330,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <TabControl>
+                <!--Margin="50,0,50,0" TabStripPlacement="Top" >-->
+                <TabControl.Resources>
+                    <Style TargetType="{x:Type TabControl}">
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Padding" Value="0,0,0,0" />
+                        <Setter Property="Margin" Value="0,0,0,0"/>
+                        <Setter Property="Width" Value="980"></Setter>
+                        <Setter Property="Height" Value="1280"></Setter>
+                    </Style>
+                </TabControl.Resources>
+                <!-- Home -->
+                <TabItem Width="69" Height="96" Margin="70,0,-70,0" Background="{x:Null}" VerticalAlignment="Top" >
+                    <TabItem.Resources>
+                        <Style TargetType="{x:Type TabItem}" >
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Header">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="TabItem">
+                                        <Image OpacityMask="Transparent" ></Image>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Margin" Value="0"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                            <Style.Triggers>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/home_on.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="False"/>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/home_on.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                        <Condition Property="IsSelected" Value="False"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/home_click.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="False"/>
+                                        <Condition Property="IsSelected" Value="False"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/home.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                            </Style.Triggers>
+                        </Style>
+                    </TabItem.Resources>
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="500"/>
+                            <RowDefinition Height="682"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" Height="482" VerticalAlignment="Bottom" Margin="0,0,0,0">
+                            <ucM270:ucM270Device Width="912" Height="482" VerticalAlignment="Bottom"/>
+
+                        </Grid>
+
+                        <Grid Margin="5,2,5,0" Grid.Row="1" >
+                            <Grid.Background>
+                                <ImageBrush ImageSource="imgTab/1_home/box.png"/>
+                            </Grid.Background>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="110*"/>
+                                <RowDefinition Height="230*"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="1" Margin="0,0,0,70">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+
+                <!-- Gas -->
+                <TabItem Width="69" Height="96" Margin="110,0,-110,0" Background="{x:Null}"  VerticalAlignment="Top" >
+                    <TabItem.Resources>
+                        <Style TargetType="{x:Type TabItem}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Header">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="TabItem">
+                                        <Image OpacityMask="Transparent" ></Image>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Margin" Value="0"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                            <Style.Triggers>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/gas_on.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="False"/>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/gas_on.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                        <Condition Property="IsSelected" Value="False"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/gas_click.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="False"/>
+                                        <Condition Property="IsSelected" Value="False"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/gas.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+
+                            </Style.Triggers>
+                        </Style>
+                    </TabItem.Resources>
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="500"/>
+                            <RowDefinition Height="682"/>
+
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="417*"/>
+                                <RowDefinition Height="275*"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3">
+                                <Grid.Background>
+                                    <ImageBrush ImageSource="imgTab/2_gas/box.png"/>
+                                </Grid.Background>
+
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+
+                <!-- Pump -->
+                <TabItem Width="68" Height="96" Margin="150,0,-150,0"  Background="{x:Null}"  VerticalAlignment="Top" >
+                    <TabItem.Resources>
+                        <Style TargetType="{x:Type TabItem}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Header">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="TabItem">
+                                        <Image >
+                                            <Image.OpacityMask>
+                                                <ImageBrush ImageSource="imgMenu/pump.png"/>
+                                            </Image.OpacityMask>
+                                        </Image>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Margin" Value="0"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                            <Style.Triggers>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/pump_on.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="False"/>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/pump_on.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                        <Condition Property="IsSelected" Value="False"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/pump_click.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="False"/>
+                                        <Condition Property="IsSelected" Value="False"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/pump.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TabItem.Resources>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="500"/>
+                            <RowDefinition Height="682"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Image Source="imgDevice/Device_Inner.png" Width="912" Height="480" VerticalAlignment="Bottom"/>
+                            <Image x:Name="pumpLight" Source="imgTab/3_pump/pumponHigh.png" Width="414" Height="134" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,25"/>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Image Source="/imgTab/4_moter/title box.png" Width="180" Height="50" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="42,24,758,0"/>
+                            <Label x:Name="AutoPump_Label" Content="자동공급펌프" FontSize="18" Foreground="#D3D5D9" FontFamily="/DPT_WPF;component/Font/#NanumSquare Bold" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="75,35,794,0" Height="30" Width="111" RenderTransformOrigin="1.363,0.617"/>
+                            <Rectangle Height="51" Canvas.Left="-564" Canvas.Top="271" Width="182" Margin="42,24,756,607">
+                                <Rectangle.Fill>
+                                    <SolidColorBrush Color="Black" Opacity="0"/>
+                                </Rectangle.Fill>
+                                <Rectangle.InputBindings>
+                                    <MouseBinding Gesture="LeftClick" Command="{Binding AutoPumpCommand}"/>
+                                </Rectangle.InputBindings>
+                            </Rectangle>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+
+                <!-- Motor -->
+                <TabItem Width="68" Height="96" Margin="190,0,-190,0"  Background="{x:Null}"  VerticalAlignment="Top" >
+                    <TabItem.Resources>
+                        <Style TargetType="{x:Type TabItem}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Header">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="TabItem">
+                                        <Image OpacityMask="Transparent" ></Image>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Margin" Value="0"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                            <Style.Triggers>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/motor_on.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="False"/>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/motor_on.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                        <Condition Property="IsSelected" Value="False"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/moter_click.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="False"/>
+                                        <Condition Property="IsSelected" Value="False"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/motor.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                            </Style.Triggers>
+                        </Style>
+                    </TabItem.Resources>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="500"/>
+                            <RowDefinition Height="682"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Image Source="imgDevice/Device_Inner.png" Width="912" Height="480" VerticalAlignment="Bottom"/>
+                            <Image x:Name="imgRecotor" Source="imgTab/4_moter/recotor_highright.png" Width="400" Height="105" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,10,105" Visibility="Collapsed"/>
+                            <Image x:Name="imgBuildRoom" Source="imgTab/4_moter/buildroom_highright.png" Width="266" Height="79" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,35" Visibility="Collapsed"/>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <ucCommon:ucCommonM270Motor x:Name="_ucCommonM270Motor" Width="912" Height="568" VerticalAlignment="Bottom" Margin="34,0,34,53"/>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+
+                <!-- LOG -->
+                <TabItem Width="69" Height="96" Margin="230,0,-230,0"  Background="{x:Null}"  VerticalAlignment="Top" >
+                    <TabItem.Resources>
+                        <Style TargetType="{x:Type TabItem}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Header">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="TabItem">
+                                        <Image OpacityMask="Transparent" ></Image>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Margin" Value="0"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                            <Style.Triggers>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/log_on.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="False"/>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/log_on.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                        <Condition Property="IsSelected" Value="False"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/log click.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="False"/>
+                                        <Condition Property="IsSelected" Value="False"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/log.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TabItem.Resources>
+                    <Grid>
+                        <Image Source="imgTab/5_log/text shape.png" Width="904" Height="955" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <ListView Width="900" Height="390" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="40,115,40,0" BorderBrush="Transparent"
+                                  Background="Transparent" x:Name="lvLogs" ScrollViewer.VerticalScrollBarVisibility="auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="0" 
+                                  Foreground="#FFFFECD0">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="BorderBrush" Value="Transparent" />
+                                            <Setter Property="BorderThickness" Value="0" />
+                                            <Setter Property="Background" Value="#4C5364"/>
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="true">
+                                            <Setter Property="BorderBrush" Value="Transparent" />
+                                            <Setter Property="BorderThickness" Value="0" />
+                                            <Setter Property="Background" Value="#4C5364"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.View>
+                                <GridView>
+                                    <GridView.ColumnHeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                            <Setter Property="Height" Value="18"/>
+                                        </Style>
+                                    </GridView.ColumnHeaderContainerStyle>
+                                    <GridViewColumn Width="230" DisplayMemberBinding="{Binding Time}"/>
+                                    <GridViewColumn Width="140" DisplayMemberBinding="{Binding Machine}" />
+                                    <GridViewColumn Width="430" DisplayMemberBinding="{Binding Work}"/>
+                                    <GridViewColumn Width="100">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Image Source="{Binding Image}" Stretch="Uniform" Height="20"/>
+                                                    <Label FontSize="21" Content=" "/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+
+                        </ListView>
+                        <ListView Width="900" Height="388" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="40,0,40,124" BorderBrush="Transparent"
+                                  Background="Transparent" x:Name="lvWeekFile" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                                  Foreground="#FFFFECD0">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <!--<Setter Property="Background" Value="Transparent" />-->
+                                            <Setter Property="BorderBrush" Value="Transparent" />
+                                            <Setter Property="BorderThickness" Value="0" />
+                                            <Setter Property="Background" Value="#4C5364"/>
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="true">
+                                            <Setter Property="BorderBrush" Value="Transparent" />
+                                            <Setter Property="BorderThickness" Value="0" />
+                                            <Setter Property="Background" Value="#4C5364"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.View>
+                                <GridView>
+                                    <GridView.ColumnHeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+
+                                        </Style>
+                                    </GridView.ColumnHeaderContainerStyle>
+                                    <GridViewColumn Width="90">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Image Source="{Binding WeekImage}" Stretch="Uniform" Height="25" Width="90"/>
+                                                    <Label FontSize="21.4" Content=" "/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn  Header="시작 시간" Width="180" DisplayMemberBinding="{Binding WeekStartTime}" />
+                                    <GridViewColumn Header="종료 시간" Width="180" DisplayMemberBinding="{Binding WeekEndTime}"/>
+                                    <GridViewColumn Header="총 소요시간" Width="180" DisplayMemberBinding="{Binding WeekWorkTime}"/>
+                                    <GridViewColumn Header="파일 이름" Width="180" DisplayMemberBinding="{Binding WeekFileName}"/>
+
+                                    <GridViewColumn Width="90">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Image x:Name="imgEtc" PreviewMouseUp="imgEtc_PreviewMouseUp" Source="{Binding WeekImageetc}" Stretch="Uniform" Height="28" Width="90"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Label Content="Log 내용" Foreground="#ffffff" FontSize="18" FontFamily="/DPT_WPF;component/Font/#NanumSquare" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,80,0,0"/>
+                        <Label Content="최근 7일간 출력이력" Foreground="#ffffff" FontSize="18" FontFamily="/DPT_WPF;component/Font/#NanumSquare" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,640,0,0"/>
+                    </Grid>
+                </TabItem>
+
+                <!-- Printing -->
+                <TabItem Width="68" Height="96" Margin="270,0,-270,0"  Background="{x:Null}"  VerticalAlignment="Top" >
+                    <TabItem.Resources>
+                        <Style TargetType="{x:Type TabItem}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Header">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="TabItem">
+                                        <Image OpacityMask="Transparent" ></Image>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Margin" Value="0"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                            <Style.Triggers>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="69" Height="97">
+                                                <Image Source="/imgMenu/printing_on.png" VerticalAlignment="Top"  Stretch="Uniform" Width="88" Canvas.Right="-10"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="False"/>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="69" Height="97">
+                                                <Image Source="/imgMenu/printing_on.png" VerticalAlignment="Top"  Stretch="Uniform" Width="88" Canvas.Right="-10"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                        <Condition Property="IsSelected" Value="False"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/print_click.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="False"/>
+                                        <Condition Property="IsSelected" Value="False"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/printing.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+
+                            </Style.Triggers>
+                        </Style>
+                    </TabItem.Resources>
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="48"/>
+                            <RowDefinition Height="671"/>
+                            <RowDefinition Height="90"/>
+                            <RowDefinition Height="284*"/>
+                            <RowDefinition Height="89*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.RowSpan="4">
+                            <Grid.Background>
+                                <ImageBrush ImageSource="/imgTab/6_printing/shape.png"/>
+                            </Grid.Background>
+                        </Grid>
+                        <TextBlock x:Name="lbltime" Text="00h : 00m : 00s" Foreground="#FF257BB4" FontSize="20" Margin="92,14,727,627" Grid.Row="1" />
+                        <TextBlock Text="3D Printing object" Foreground="#FF676767" FontSize="20" Margin="285,12,388,631" Grid.Row="1"/>
+                        <Grid Margin="20,0,0,0" Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="159*"/>
+                                <RowDefinition Height="611*"/>
+                            </Grid.RowDefinitions>
+
+                            <!--<Image Width="30" Source="/imgPrinting/icon_list.png" Stretch="None" VerticalAlignment="Center" Margin="76,21,131,128.194"/>-->
+
+                            <Grid Grid.Row="0">
+                                <ProgressBar x:Name="progress" BorderThickness="0" Height="11" Padding="10" VerticalAlignment="Top" Margin="15,15,15,0" Maximum="100" Foreground="#FF0078D7" >
+                                    <ProgressBar.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="Black" Offset="0"/>
+                                            <GradientStop Color="#FFC2C2C2"/>
+                                        </LinearGradientBrush>
+                                    </ProgressBar.Background>
+                                </ProgressBar>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Canvas x:Name="myCanvas" Grid.Row="0" VerticalAlignment="Top" Width="650" Height="650" RenderTransformOrigin="0.5,-0.09"  Margin="-86,748,416,-727">
+                                <Canvas.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="0.3" ScaleX="-0.3"/>
+                                        <SkewTransform AngleY="0" AngleX="0"/>
+                                        <RotateTransform Angle="-180"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Canvas.RenderTransform>
+                                <Path x:Name="polyInline" Stroke="Blue" StrokeThickness="1" />
+                                <Path x:Name="polyOutline" Stroke="Red" StrokeThickness="1" />
+                            </Canvas>
+
+                        </Grid>
+                        <Grid  Grid.Row="2" Margin="35,0,20,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Border Background="Transparent" BorderBrush="Transparent" BorderThickness="0" CornerRadius="10,10,10,10" Margin="0,-20,0,0" VerticalAlignment="Top">
+                                    <Slider  Style="{StaticResource print_Slider}" x:Name="slLayer1" Foreground="Transparent" PreviewMouseUp="slLayer1_PreviewMouseUp" ValueChanged="slLayer1_ValueChanged" Value="0" Width="808" Grid.Row="1"  HorizontalAlignment="Left" Margin="5,0,0,0"/>
+                                </Border>
+                                <StackPanel Orientation="Horizontal" Margin="0,-25,0,0" Grid.Row="1" HorizontalAlignment="Right">
+                                    <TextBlock x:Name="txtCurrentLayer" FontFamily="/textResource/#NanumGothic" Text="0" Foreground="#FFECD0" FontSize="15" VerticalAlignment="Center"/>
+                                    <TextBlock Text=" " Foreground="#7F8797" FontSize="1" />
+                                    <TextBlock Text="/" Foreground="#7F8797" FontSize="20" FontFamily="/textResource/#NanumGothic" VerticalAlignment="Center"/>
+                                    <TextBlock Text=" " Foreground="#7F8797" FontSize="1"/>
+                                    <TextBlock x:Name="txtTotalLayer" Text="0" Foreground="#7F8797" FontSize="15" FontFamily="/textResource/#NanumGothic" VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                            </Grid>
+
+                            <Grid Grid.Row="1">
+                                <TextBlock Text="LIST" FontSize="18" Foreground="#FFFFFF" FontFamily="/textResource/#NanumGothic" VerticalAlignment="Bottom" Margin="20,20,0,-10"/>
+                            </Grid>
+
+                        </Grid>
+
+                        <ListView Grid.Row="3" x:Name="lvFile" SelectionMode="Single" SelectionChanged="lvFile_SelectionChanged"  Margin="60,7,50,45" Background="Transparent" BorderThickness="0" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                            <ListView.Resources>
+                                <Style TargetType="{x:Type ListViewItem}">
+
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type ListViewItem}">
+
+                                                <Border x:Name="ItemBorder" Width="auto" Height="40">
+                                                    <TextBlock Foreground="#C0C7D6" Text="{Binding}" Padding="0,10,0,0"  TextAlignment="Left" VerticalAlignment="Center" FontSize="13" Width="auto" Height="40" />
+                                                </Border>
+
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsEnabled" Value="False">
+                                                        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                                        <Setter Property="BorderBrush" Value="#C0C7D6"/>
+                                                        <Setter Property="Background" Value="Transparent"/>
+                                                        <Setter Property="BorderThickness" Value="0" />
+                                                        <Setter Property="Height" Value="40"/>
+                                                    </Trigger>
+
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                        <!--<Setter TargetName="ItemBorder" Property="Background" Value="#FF4BA5E4"/>-->
+                                                        <Setter TargetName="ItemBorder" Property="BorderBrush" Value="#C0C7D6"/>
+                                                        <Setter TargetName="ItemBorder" Property="BorderThickness" Value="1" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.Resources>
+
+                            <ListView.ItemTemplate>
+                                <StaticResource ResourceKey="ItemDataTemplate"/>
+                            </ListView.ItemTemplate>
+                            <ListView.View>
+                                <GridView>
+                                    <GridView.ColumnHeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+
+                                        </Style>
+                                    </GridView.ColumnHeaderContainerStyle>
+
+
+                                    <GridViewColumn  x:Name="chMultiFile"  Width="0">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid Height="40">
+                                                    <CheckBox  Margin="0,15,0,0"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn  Width="200" DisplayMemberBinding="{Binding}"/>
+
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Grid Grid.Row="1">
+                            <LoadingAni:LoadingAnimation x:Name="aniLoading" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Image x:Name="imgPrintStart" Visibility="Visible" Grid.Row="4" Source="/imgTab/6_printing/print_btn_start_enable.png" Stretch="None" VerticalAlignment="Center" Margin="136,9,686,10" Height="70">
+                            <Image.InputBindings>
+                                <MouseBinding Gesture="LeftClick" Command="{Binding PrintStartCommand}"></MouseBinding>
+                            </Image.InputBindings>
+                        </Image>
+                        <Image x:Name="imgPrintPause" Visibility="Visible" Grid.Row="4" Source="/imgTab/6_printing/print_btn_pause_enable.png" Stretch="None" VerticalAlignment="Center" Margin="411,9,411,10"  Height="70">
+                            <Image.InputBindings>
+                                <MouseBinding Gesture="LeftClick" Command="{Binding PrintPauseCommand}"></MouseBinding>
+                            </Image.InputBindings>
+                        </Image>
+                        <Image x:Name="imgPrintFinish" Visibility="Collapsed" Grid.Row="4" Height="70" Margin="686,9,136,10" Source="/imgTab/6_printing/print_btn_finish.png" VerticalAlignment="Center" >
+                            <Image.InputBindings>
+                                <MouseBinding Gesture="LeftClick" Command="{Binding PrintFinishCommand}"></MouseBinding>
+                            </Image.InputBindings>
+                        </Image>
+                        <Image x:Name="imgPrintStop" Visibility="Visible" Grid.Row="4" Source="/imgTab/6_printing/print_btn_stop_enable.png" Stretch="None" VerticalAlignment="Center" Margin="686,9,136,10" Height="70">
+                            <Image.InputBindings>
+                                <MouseBinding Gesture="LeftClick" Command="{Binding PrintStopCommand}"></MouseBinding>
+                            </Image.InputBindings>
+                        </Image>
+                        <Image x:Name="imgPrintResume" Visibility="Collapsed" Grid.Row="4" Source="/imgTab/6_printing/print_btn_resume.png" Stretch="None" VerticalAlignment="Center" Margin="136,9,686,10" Height="70">
+                            <Image.InputBindings>
+                                <MouseBinding Gesture="LeftClick" Command="{Binding PrintResumeCommand}"></MouseBinding>
+                            </Image.InputBindings>
+                        </Image>
+                        <Image x:Name="btnReset" Source="/imgTab/6_printing/print_btn_reset.png" HorizontalAlignment="Left" Margin="901,54,0,0" VerticalAlignment="Top" Width="27" Grid.Row="2" Height="27">
+                            <Image.InputBindings>
+                                <MouseBinding Gesture="LeftClick" Command="{Binding PrintResetCommand}"></MouseBinding>
+                            </Image.InputBindings>
+                        </Image>
+                    </Grid>
+
+                </TabItem>
+
+
+                <!-- Temperature -->
+                <TabItem Width="85" Height="96" Margin="310,0,-310,0" Background="{x:Null}"  VerticalAlignment="Top" >
+                    <TabItem.Resources>
+                        <Style TargetType="{x:Type TabItem}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Header">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="TabItem">
+                                        <Image OpacityMask="Transparent" ></Image>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Margin" Value="0"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                            <Style.Triggers>
+
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="86" Height="97">
+                                                <Image Source="/imgMenu/tembtn_on.png" VerticalAlignment="Top"  Stretch="Uniform" Width="111" Canvas.Right="-13"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="False"/>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="86" Height="97">
+                                                <Image Source="/imgMenu/tembtn_on.png" VerticalAlignment="Top"  Stretch="Uniform" Width="111" Canvas.Right="-13"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                        <Condition Property="IsSelected" Value="False"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="87" Height="97" VerticalAlignment="Top">
+                                                <Image Source="/imgMenu/tem_click.png" VerticalAlignment="Top" Stretch="Uniform" Width="86"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="False"/>
+                                        <Condition Property="IsSelected" Value="False"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="86" Height="97" VerticalAlignment="Top">
+                                                <Image Source="/imgMenu/temperature.png" VerticalAlignment="Top" Stretch="Uniform" Width="86"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+
+                            </Style.Triggers>
+                        </Style>
+                    </TabItem.Resources>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="500"/>
+                            <RowDefinition Height="682"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Image Source="imgDevice/Device_Inner.png" Width="912" Height="480" VerticalAlignment="Bottom"/>
+                            <Image Source="imgTab/7_temperature/sensorhighlight.png" Width="247" Height="86" VerticalAlignment="Bottom" Margin="0,0,0,270"/>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+
+                <TabItem Margin="350,0,-350,0" Background="{x:Null}"  VerticalAlignment="Top" Height="98" >
+                    <TabItem.Resources>
+                        <Style TargetType="{x:Type TabItem}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Header">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="TabItem">
+                                        <Image OpacityMask="Transparent" ></Image>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Margin" Value="0"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                            <Style.Triggers>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/log_on.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="False"/>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/log_on.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                        <Condition Property="IsSelected" Value="False"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/log click.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="False"/>
+                                        <Condition Property="IsSelected" Value="False"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Header">
+                                        <Setter.Value>
+                                            <Canvas Background="#292e38" Width="70" Height="97">
+                                                <Image Source="/imgMenu/log.png" VerticalAlignment="Top"  Stretch="Uniform" Width="69"/>
+                                            </Canvas>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+
+                            </Style.Triggers>
+                        </Style>
+                    </TabItem.Resources>
+                </TabItem>
+            </TabControl>
+
+        </Grid>
+        <Grid Grid.Row="6" Grid.ColumnSpan="2">
+            <TextBlock Text="Copyrightⓒ 2018 DAEGUN Co,. Ltd" VerticalAlignment="Bottom" Height="41"  FontSize="12" Foreground="#676767" TextAlignment="Center" TextWrapping="Wrap"/>
+        </Grid>
+        <Rectangle x:Name="darkbackground" Visibility="Collapsed" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="7" Margin="0,0,-8,-8" Fill="#8C000000" HorizontalAlignment="Left" Height="1920" Stroke="#00000000" VerticalAlignment="Top" Width="1080"/>
+    </Grid>
+</Window>
