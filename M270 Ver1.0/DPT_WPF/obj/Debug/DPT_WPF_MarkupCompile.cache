@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Depert\M270 Ver1.0\DPT_WPF\obj\Debug\
+C:\Test\M270 Ver1.0\DPT_WPF\obj\Debug\
 DPT_WPF
 none
 false
 DEBUG;TRACE
-C:\Depert\M270 Ver1.0\DPT_WPF\App.xaml
+C:\Test\M270 Ver1.0\DPT_WPF\App.xaml
 192129978915
 
-231450310260
-81-318016193
+242002696457
+811195552618
 closeWindow.xaml;File_Status.xaml;HMIM270.xaml;imgLoading\Block.xaml;imgLoading\LoadingAnimation.xaml;Login.xaml;moveWindow.xaml;resourceDirectory\resourScrollbar.xaml;resourceDirectory\resourTabSub.xaml;AutoPumpWindow.xaml;speedWindows.xaml;Themes\MetroDark\MetroDark.MSControls.Core.Implicit.xaml;Themes\MetroDark\MetroDark.MSControls.Toolkit.Implicit.xaml;Themes\MetroDark\Styles.Shared.xaml;Themes\MetroDark\Styles.WPF.xaml;Themes\MetroDark\Theme.Colors.xaml;ucCommon\ucCommonMotor.xaml;ucLogin.xaml;ucM270\ucM270Device.xaml;
 
-False
+True
 
