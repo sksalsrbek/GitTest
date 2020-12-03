@@ -2669,6 +2669,7 @@ namespace DPT_WPF
                 d.OPCItemWriteValueTextBoxes[62] = Convert.ToString(pump_remain);
                 d.opcWrite("OPCItemSyncWrite62", daServerMgt);
                 apw.Remainpump.Content = d.OPCItemWriteValueTextBoxes[62];
+                Console.WriteLine("헤응");
             }
         }
     }
